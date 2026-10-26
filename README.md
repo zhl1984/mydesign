@@ -17,16 +17,6 @@
 ```sh
 npx skills add zhl1984/mydesign --skill page-prd -g
 ```
-
-如果已有旧版并希望自动备份、保留已有符号链接，可以克隆后使用包内安装器：
-
-```sh
-git clone https://github.com/zhl1984/mydesign.git
-node mydesign/skills/page-prd/scripts/install.mjs --target ~/.codex/skills/page-prd
-```
-
-跨工具共用时，也可将目标改为 `~/.agents/skills/page-prd`。安装器会备份旧版并保留已有符号链接，安装后刷新技能列表或重启客户端。
-
 固定版本及离线安装包见 [Releases](https://github.com/zhl1984/mydesign/releases)。ZIP 解压后运行其中 `page-prd/scripts/install.mjs`，按 `INSTALL.md` 指定目标。
 
 ## 使用
