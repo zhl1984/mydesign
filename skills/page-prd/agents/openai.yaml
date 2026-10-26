@@ -1,0 +1,4 @@
+interface:
+  display_name: "Page PRD · 页面需求文档"
+  short_description: "为原业务页面维护独立 Markdown 功能 PRD、目录关联与团队评审边界"
+  default_prompt: "使用 $page-prd，核对当前真实页面及需求后，更新对应的 Markdown 功能 PRD，保持原业务路由和已确认的文档体验。"

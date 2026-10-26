@@ -1,0 +1,23 @@
+{
+  "pages": [
+    {
+      "id": "example-list",
+      "name": "示例列表",
+      "module": "示例管理",
+      "path": "/example-management",
+      "aliases": [],
+      "parent": null,
+      "file": "documents/example-list.md"
+    },
+    {
+      "id": "example-create",
+      "name": "新建示例",
+      "module": "示例管理",
+      "path": "/example-management/create",
+      "aliases": [],
+      "parent": "example-list",
+      "file": "documents/example-create.md"
+    }
+  ],
+  "revisions": { "示例管理": [] }
+}

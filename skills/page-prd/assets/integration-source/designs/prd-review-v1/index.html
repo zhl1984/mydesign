@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>页面旁 PRD</title>
+    <link rel="stylesheet" href="./review.css" />
+  </head>
+  <body>
+    <main class="pr-shell pr-shell--collapsed">
+      <iframe id="page-frame" title="平台页面"></iframe>
+      <section id="prd-panel" class="pr-panel" aria-label="页面需求文档" hidden>
+        <div
+          id="panel-resizer"
+          class="pr-resizer"
+          role="separator"
+          aria-orientation="vertical"
+          aria-label="调整PRD宽度"
+          tabindex="0"
+        ></div>
+        <header class="pr-panel-header">
+          <button
+            id="directory-toggle"
+            class="pr-icon"
+            title="收起目录"
+            aria-label="收起目录"
+          ></button>
+          <h1 id="document-title">登录 PRD</h1>
+          <span id="save-status" role="status"></span>
+          <div class="pr-tools">
+            <button
+              id="insert-toggle"
+              class="pr-icon"
+              title="插入内容"
+              aria-label="插入内容"
+              hidden
+            ></button
+            ><button
+              id="edit"
+              class="pr-icon"
+              title="编辑文档"
+              aria-label="编辑文档"
+            ></button
+            ><button
+              id="comments-toggle"
+              class="pr-icon"
+              title="展开评论"
+              aria-label="展开评论"
+            >
+              <span id="pending-count"></span></button
+            ><button
+              id="more-toggle"
+              class="pr-icon"
+              title="更多"
+              aria-label="更多"
+            ></button
+            ><button
+              id="collapse"
+              class="pr-icon"
+              title="收起PRD"
+              aria-label="收起PRD"
+            ></button>
+          </div>
+        </header>
+        <div class="pr-document-layout">
+          <nav id="directory-panel" class="pr-directory" aria-label="功能目录">
+            <button id="revision-entry" class="pr-revision">修订记录</button>
+            <div id="directory"></div>
+            <div
+              id="directory-resizer"
+              class="pr-directory-resizer"
+              role="separator"
+              aria-orientation="vertical"
+              aria-label="调整目录宽度"
+              title="拖动调整目录宽度"
+              tabindex="0"
+            ></div>
+          </nav>
+          <div class="pr-writing-column">
+            <div id="review-tip" class="pr-info" hidden>
+              评审模式：正文只读，修改请在本地完成后随代码合并发布。
+            </div>
+            <div id="document-scroll" class="pr-document-scroll">
+              <article
+                id="document"
+                class="pr-document"
+                aria-label="PRD正文"
+                spellcheck="false"
+              ></article>
+              <section id="revisions" class="pr-document" hidden>
+                <h2>修订记录</h2>
+                <p>暂无修订记录。</p>
+              </section>
+              <section id="unmatched" class="pr-document" hidden>
+                <h2>该页面暂未配置 PRD</h2>
+                <p>此页面尚未绑定独立 Markdown 文档。</p>
+              </section>
+            </div>
+          </div>
+          <aside
+            id="review-panel"
+            class="pr-review"
+            aria-label="评审评论"
+            hidden
+          >
+            <header>
+              <strong>评审</strong
+              ><span id="review-count" class="pr-count"></span
+              ><button
+                id="new-comment"
+                class="pr-icon"
+                aria-label="添加整页评论"
+                title="添加整页评论"
+              >
+                ＋</button
+              ><button
+                id="close-comments"
+                class="pr-icon"
+                aria-label="关闭评论"
+                title="关闭评论"
+              >
+                ×
+              </button>
+            </header>
+            <div class="pr-review-notice">
+              评审演示 · 正式共享服务尚未接入<br />评论刷新后恢复示例
+            </div>
+            <div class="pr-comment-tabs">
+              <button data-filter="open" class="is-active">
+                待处理 <span id="open-count"></span></button
+              ><button data-filter="resolved">
+                已解决 <span id="resolved-count"></span>
+              </button>
+            </div>
+            <div id="comment-list" class="pr-comment-list"></div>
+            <form id="comment-form" class="pr-comment-form">
+              <div id="quote-preview" hidden></div>
+              <label for="comment-input">添加整页评论</label
+              ><textarea
+                id="comment-input"
+                rows="3"
+                placeholder="提出问题或补充建议…"
+              ></textarea>
+              <div>
+                <span>产品设计 · 演示</span
+                ><button
+                  type="submit"
+                  id="comment-submit"
+                  class="pr-primary"
+                  disabled
+                >
+                  发布
+                </button>
+              </div>
+            </form>
+          </aside>
+        </div>
+        <div id="more-menu" class="pr-popover pr-more" hidden>
+          <div class="pr-file-info">
+            <span id="file-path"></span><span id="version-label"></span>
+          </div>
+          <button id="source-open">编辑 Markdown 源码</button
+          ><button id="export">下载 Markdown</button
+          ><button id="retry-save" hidden>重试保存</button
+          ><label
+            ><input id="review-mode" type="checkbox" />评审模式（演示）</label
+          >
+        </div>
+        <div id="insert-menu" class="pr-popover pr-insert" hidden>
+          <button data-format="h2">二级标题</button
+          ><button data-format="h3">三级标题</button
+          ><button data-format="bold">加粗</button
+          ><button data-format="list">项目列表</button
+          ><button data-format="table">表格</button
+          ><button id="insert-flow">流程图</button
+          ><button id="insert-architecture">架构图</button
+          ><button id="insert-image">上传图片</button>
+        </div>
+      </section>
+    </main>
+    <button
+      id="open-panel"
+      class="pr-open"
+      aria-label="显示PRD"
+      title="显示PRD；可上下拖动"
+    >
+      PRD
+    </button>
+    <div id="selection-tools" class="pr-selection" hidden>
+      <button data-format="bold" id="selection-bold" title="加粗">
+        <b>B</b></button
+      ><button id="selection-comment">＋ 添加批注</button>
+    </div>
+    <div id="figure-tools" class="pr-selection" hidden>
+      <button id="figure-edit">编辑</button
+      ><button id="figure-zoom">放大</button
+      ><button id="figure-delete">删除</button>
+    </div>
+    <input
+      id="image-file"
+      type="file"
+      accept="image/png,image/jpeg,image/webp,image/gif"
+      hidden
+    />
+    <div id="toast" class="pr-toast" role="status" hidden></div>
+    <dialog id="diagram-dialog" class="pr-dialog">
+      <header>
+        <h2 id="diagram-title">编辑图表</h2>
+        <button
+          data-close="diagram-dialog"
+          class="pr-icon"
+          aria-label="关闭图表编辑"
+        >
+          ×
+        </button>
+      </header>
+      <div class="pr-diagram-columns">
+        <label class="pr-code-label"
+          >Mermaid 源码<textarea
+            id="diagram-source"
+            aria-label="图表Mermaid源码"
+            spellcheck="false"
+          ></textarea>
+        </label>
+        <section class="pr-diagram-preview">
+          <span>实时预览</span>
+          <div id="diagram-preview"></div>
+        </section>
+      </div>
+      <p id="diagram-error" class="pr-error" role="status"></p>
+      <footer>
+        <button data-close="diagram-dialog" class="pr-small-button">取消</button
+        ><button id="diagram-save" class="pr-primary" disabled>插入图表</button>
+      </footer>
+    </dialog>
+    <dialog id="source-dialog" class="pr-dialog">
+      <header>
+        <h2>Markdown 源码</h2>
+        <button
+          data-close="source-dialog"
+          class="pr-icon"
+          aria-label="关闭源码"
+        >
+          ×
+        </button>
+      </header>
+      <textarea
+        id="markdown-source"
+        class="pr-source"
+        aria-label="Markdown源码"
+        spellcheck="false"
+      ></textarea>
+      <footer>
+        <button data-close="source-dialog" class="pr-small-button">取消</button
+        ><button id="source-apply" class="pr-primary">应用修改</button>
+      </footer>
+    </dialog>
+    <dialog id="zoom-dialog" class="pr-dialog pr-zoom">
+      <header>
+        <h2>图表预览</h2>
+        <button
+          data-close="zoom-dialog"
+          class="pr-icon"
+          aria-label="关闭放大预览"
+        >
+          ×
+        </button>
+      </header>
+      <div id="zoom-content"></div>
+    </dialog>
+    <script type="module" src="./app.mjs"></script>
+  </body>
+</html>
